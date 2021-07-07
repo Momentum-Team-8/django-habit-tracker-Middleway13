@@ -2,10 +2,9 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
-    username = models.CharField(max_length=256)
-    email = models.CharField(max_length=256)
-    password = models.CharField(max_length=256)
-    
+    def __repr__(self):
+        return f"<User username={self.username}>"
+
     def __str__(self):
         return self.username
     
@@ -28,4 +27,5 @@ class HabitRecord(models.Model):
         return self.name
 
 
-class UniqueConstraint(fields=['user', 'name', 'date'], name='unique_records')
+"""class UniqueConstraint(fields=['user', 'name', 'date'], name='unique_records'):
+"""
