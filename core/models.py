@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db.models.constraints import UniqueConstraint
 
 class User(AbstractUser):
     def __repr__(self):
@@ -21,11 +22,8 @@ class Habit(models.Model):
 class HabitRecord(models.Model):
     habit = models.ForeignKey(Habit, null=True, on_delete=models.CASCADE, related_name="records")
     outcome = models.PositiveIntegerField()
-    date = models.DateTimeField(auto_now_add=True)
-    
-    def __str__(self):
-        return self.name
-
-
-"""class UniqueConstraint(fields=['user', 'name', 'date'], name='unique_records'):
-"""
+    date = models.DateField()
+    class Meta:
+        constraints = [
+            UniqueConstraint(fields=['habit', 'outcome', 'date'], name='unique_records')
+        ]
