@@ -7,5 +7,10 @@ from .models import Habit, HabitRecord
 # Create your views here.
 def homepage(request):
     if request.user.is_authenticated:
-        return redirect ("list_decks")
+        return redirect ("list_habits")
     return render(request, "core/homepage.html")
+
+@login_required  # this is a decorator or function that will redirect you to login page
+def list_habits(request):
+    habits = Habit.objects.all().order_by("name")
+    return render(request, "core/list_habits.html", {"habits": habits})
