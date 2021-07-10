@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+    {% for habit in habits %}
+    <section>
+        <div>
+            <a href="{% url 'show_habit' pk=habit.pk %}">{{habit.name}}</a>
+        </div>
+    </section>
+    {% endfor %}
+</div>
+
+{% endblock content %}

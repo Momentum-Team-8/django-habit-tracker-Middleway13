@@ -17,9 +17,12 @@ from django.contrib import admin
 from django.conf import settings
 from django.urls import path, include
 
-from core import views 
+from core import views as habit_views
 
 urlpatterns = [
+    path("", habit_views.homepage, name="homepage"),
+    path("habits/", habit_views.list_habits, name="list_habits"),
+    
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.default.urls')),
 ]

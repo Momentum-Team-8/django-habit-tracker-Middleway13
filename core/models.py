@@ -12,7 +12,7 @@ class User(AbstractUser):
         return self.username
     
 class Habit(models.Model):
-    user = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name="habits", null=True)
     name = models.CharField(max_length=256)
     target = models.PositiveIntegerField()
     created_at = models.DateField(default=date.today)
